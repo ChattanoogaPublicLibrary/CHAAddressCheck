@@ -1,0 +1,76 @@
+/* =============================================================================
+   Additional Defaults
+   ========================================================================== */ 
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
+img { max-width: 100%; height: auto; -ms-interpolation-mode:bicubic }
+
+::-moz-selection { background: $light-grey; color: $dark-grey; text-shadow: none; }
+::selection { background: $light-grey; color: $dark-grey; text-shadow: none; }
+
+/* =============================================================================
+   Navigation
+   ========================================================================== */
+
+nav {
+  position: absolute;
+  width: 100%;
+  padding: 1.25em 0 1.3em 0;
+  background-color: #fff;
+  background: rgba( white, 0.8);
+  border-bottom: 1px solid $medium-grey;
+  z-index: 1;
+
+  #address {
+    display: block;
+    width: 75%;
+    float: right;
+    margin-right: 5%;
+    padding: .5em 1em;
+    font-size: 1.25em;
+    border: 1px solid $medium-grey;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+
+    @media (min-width: 600px) {
+      float: none;
+      margin: auto;
+    }
+
+  }
+
+}
+
+// OSM zoom in/out buttons
+.esriSimpleSlider {
+  position: absolute;
+  top: .7em;
+  color: $dark-grey;
+  border: 1px solid $medium-grey;
+
+  .esriSimpleSliderIncrementButton, .esriSimpleSliderDecrementButton {
+    color: $medium-grey;
+
+    &:hover {
+     color: $orange;
+    }
+
+  }
+
+}
+
+/* =============================================================================
+   Map View
+   ========================================================================== */
+
+#map {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left:0;
+}
