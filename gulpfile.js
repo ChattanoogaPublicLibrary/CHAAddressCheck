@@ -2,12 +2,15 @@
 
 var gulp = require('gulp');
 
+
+// load plugins
+var $ = require('gulp-load-plugins')([]);
+
 // This isn't quite working with the load-plugins lib?
 // load it manually then.
 var tsc = require('gulp-typescript-compiler');
 
-// load plugins
-var $ = require('gulp-load-plugins')();
+var gutil = require('gulp-load-utils')(['log']);
 
 gulp.task('styles', function () {
   return gulp.src('app/styles/global.scss')
@@ -21,7 +24,7 @@ gulp.task('styles', function () {
 });
 
 gulp.task('scripts', function () {
-  return gulp.src('app/scripts/main.ts')
+  return gulp.src('app/scripts/**/*.js')
     .pipe($.jshint())
     .pipe($.jshint.reporter(require('jshint-stylish')))
     .pipe($.size());
@@ -43,7 +46,7 @@ gulp.task('html', ['styles', 'scripts', 'type-scripts'], function () {
   var cssFilter = $.filter('**/*.css');
 
   return gulp.src('app/*.html')
-    .pipe($.useref.assets({searchPath: '{.tmp,app}'}))
+    .pipe($.useref.assets({searchPath: '{.tmp,app}'})).on("error", gutil.log)
     .pipe(jsFilter)
     .pipe($.uglify())
     .pipe(jsFilter.restore())
