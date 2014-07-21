@@ -11,9 +11,6 @@
     <!-- build:css styles/global.css -->
     <link rel="stylesheet" href="styles/global.css">
     <!-- endbuild -->
-    <!-- build:js scripts/vendor/modernizr.js -->
-    <script src="../app/bower_components/modernizr/modernizr.js"></script>
-    <!-- endbuild -->
     <script src="http://js.arcgis.com/3.9/"></script>
     <script>
       require({
@@ -26,9 +23,9 @@
     </script>
   </head>
   <body>
-    <nav>
+    <div class="nav">
       <input id="address" type="text" placeholder="Enter address" />
-    </nav>
+    </div>
     <div id="map"></div>
   </body>
 </html>

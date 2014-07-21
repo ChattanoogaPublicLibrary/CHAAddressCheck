@@ -7,7 +7,7 @@ Check to see whether an address is within Chattanooga City Limits.  [Try if for 
 
 ### Requirements
 
-Node.js, gulp, and bower.
+Node.js, and gulp.
 
 ### Setting Up
 
@@ -15,7 +15,6 @@ Clone the repository, then from the project root run:
 
 ```bash
 npm install
-bower install
 ```
 ## Development
 
