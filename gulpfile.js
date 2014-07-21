@@ -38,10 +38,23 @@ gulp.task('type-scripts', function () {
       sourcemap: false,
       logErrors: true
     }))
-    .pipe(gulp.dest('.tmp/scripts'));
+    .pipe(gulp.dest('.tmp/scripts'))
+    .pipe($.size());
 });
 
-gulp.task('html', ['styles', 'scripts', 'type-scripts'], function () {
+// Doesn't appear to be copying compiled typescripts otherwise?
+gulp.task('copy-type-scripts-to-build', function () {
+  return gulp.src('app/scripts/**/*.ts')
+    .pipe(tsc({
+      module: 'amd',
+      target: 'ES5',
+      sourcemap: false,
+      logErrors: true
+    }))
+    .pipe(gulp.dest('dist/scripts/'))
+});
+
+gulp.task('html', ['type-scripts', 'styles', 'scripts'], function () {
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');
 
@@ -70,12 +83,22 @@ gulp.task('images', function () {
     .pipe($.size());
 });
 
-gulp.task('fonts', function () {
+gulp.task('bower-fonts', function () {
   return $.bowerFiles()
     .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
     .pipe($.flatten())
     .pipe(gulp.dest('dist/fonts'))
     .pipe($.size());
+});
+
+gulp.task('cha-type', function () {
+  return gulp.src(['app/fonts/**/*.*'], { dot: true })
+    .pipe(gulp.dest('dist/fonts'));
+});
+
+gulp.task('geojson', function () {
+  return gulp.src(['app/geo/*.*'], { dot: true })
+    .pipe(gulp.dest('dist/geo'));
 });
 
 gulp.task('extras', function () {
@@ -87,7 +110,7 @@ gulp.task('clean', function () {
   return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
 });
 
-gulp.task('build', ['html', 'images', 'fonts', 'extras']);
+gulp.task('build', ['html','copy-type-scripts-to-build', 'images', 'bower-fonts', 'cha-type', 'geojson', 'extras']);
 
 gulp.task('default', ['clean'], function () {
   gulp.start('build');
