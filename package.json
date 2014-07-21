@@ -1,6 +1,6 @@
 {
   "name": "chaaddresscheck",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "dependencies": {},
   "devDependencies": {
     "chalk": "^0.5.1",
@@ -33,5 +33,17 @@
   },
   "engines": {
     "node": ">=0.10.0"
-  }
+  },
+  "license" : "MIT",
+  "contributors" : [
+    { "name" : "Joey Robichaud"
+    , "url" : "https://github.com/JoeRobich"
+    },
+    { "name" : "Sean Brewer"
+    , "url" : "https://github.com/seabre"
+    },
+    { "name" : "Kyle Gordy"
+    , "url" : "https://github.com/kylegordy"
+    }
+  ]
 }
