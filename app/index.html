@@ -5,16 +5,27 @@
     <title>Address Checker | Chattanooga Public Library</title>
     <meta name="description" content="Address Checker for the Chattanooga Public Library">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="http://chattlibrary.org/sites/default/files/images/favicon.png" type="image/png" />
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
     <link rel="stylesheet" href="http://js.arcgis.com/3.9/js/esri/css/esri.css" />
-    <link rel="stylesheet" href="assets/css/global.css" />
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/global.css -->
+    <link rel="stylesheet" href="styles/global.css">
+    <!-- endbuild -->
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="../bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
     <script src="http://js.arcgis.com/3.9/"></script>
-    <script src="assets/js/modernizr.js"></script>
     <script>
       require({
         packages: [{
           name: "js",
-          location: location.pathname.replace(/\/[^/]+$/, "") + "assets/js"
+          location: location.pathname.replace(/\/[^/]+$/, "") + "scripts/"
         }]
       }, ["js", "dojo/domReady!"], function (ready) {
       });
