@@ -1,26 +1,29 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-        <title></title>
-        <link rel="stylesheet" href="http://js.arcgis.com/3.9/js/esri/css/esri.css" />
-        <link rel="stylesheet" href="css/main.css" />
+  <head>
+    <meta charset="utf-8">
+    <title>Address Checker | Chattanooga Public Library</title>
+    <meta name="description" content="Address Checker for the Chattanooga Public Library">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="http://js.arcgis.com/3.9/js/esri/css/esri.css" />
 
-        <script src="http://js.arcgis.com/3.9/"></script>
-        <script>
-            require({
-                packages: [{
-                    name: "js",
-                    location: location.pathname.replace(/\/[^/]+$/, "") + "/js"
-                }]
-            }, ["js", "dojo/domReady!"], function (demo) {
-                console.log("demo started");
-            });
-        </script>
-    </head>
-    <body>
-        <input id="address" type="text" /> <input id="checkAddress" type="button" value="Check" />
-        <div id="map"></div>
-    </body>
+    <link rel="stylesheet" href="styles/global-b3c7dcf5.css">
+    <script src="http://js.arcgis.com/3.9/"></script>
+    <script>
+      require({
+        packages: [{
+          name: "js",
+          location: location.pathname.replace(/\/[^/]+$/, "") + "scripts/"
+        }]
+      }, ["js", "dojo/domReady!"], function (ready) {
+      });
+    </script>
+  </head>
+  <body>
+    <div class="nav">
+      <input id="address" type="text" placeholder="Enter address" />
+    </div>
+    <div id="map"></div>
+  </body>
 </html>
