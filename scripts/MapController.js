@@ -57,15 +57,17 @@ define(["require", "exports", "esri/map", "esri/SpatialReference", "esri/geometr
             this.cityLayer.clear();
 
             return esriRequest({ url: "geo/chattanooga.geojson", callback: "jsoncallback" }).then(function (response) {
-                var feature = response.features[0];
-
-                _this.cityPolygon = new Polygon(feature.geometry.coordinates);
-                _this.cityPolygon.setSpatialReference(_this.wgs84);
-
-                var color = Color.fromString("blue");
-                var outline = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, color, 2);
-                var citySymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, outline, color);
-                _this.cityLayer.add(new Graphic(_this.cityPolygon, citySymbol));
+                var geom = response.features[0];
+                var geomLength = geom.geometry.coordinates.length;
+                _this.cityPolygons = new Array(geomLength);
+                for (var i = 0; i < geomLength; i++) {
+                    _this.cityPolygons[i] = new Polygon(geom.geometry.coordinates[i]);
+                    _this.cityPolygons[i].setSpatialReference(_this.wgs84);
+                    var color = Color.fromString("blue");
+                    var outline = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, color, 2);
+                    var citySymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, outline, color);
+                    _this.cityLayer.add(new Graphic(_this.cityPolygons[i], citySymbol));
+                }
 
                 return true;
             });
@@ -92,7 +94,11 @@ define(["require", "exports", "esri/map", "esri/SpatialReference", "esri/geometr
                 return _this.projectPoint(_this.geometryService, candidate.location, _this.wgs84);
             }).then(function (location) {
                 // Use the builtin contains method for determining whether the address is within the city polygon.
-                var isWithin = _this.cityPolygon.contains(location);
+                var isWithin = _this.cityPolygons.map(function (i) {
+                    return i.contains(location);
+                }).reduce(function (j, k) {
+                    return j || k;
+                }, false);
                 _this.showWithinMessage(isWithin, location);
 
                 _this.map.centerAndZoom(location, 20);
