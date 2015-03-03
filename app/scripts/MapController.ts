@@ -89,7 +89,6 @@ class MapController {
             for (var i = 0; i < geomLength; i++) {
                 this.cityPolygons[i] = new Polygon(geom.geometry.coordinates[i]);
                 this.cityPolygons[i].setSpatialReference(this.wgs84);
-                console.log(this.cityPolygons[i]);
                 var color = Color.fromString("blue");
                 var outline = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, color, 2);
                 var citySymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, outline, color);
@@ -120,8 +119,10 @@ class MapController {
             return this.projectPoint(this.geometryService, candidate.location, this.wgs84);
         }).then((location: Point) => {
             // Use the builtin contains method for determining whether the address is within the city polygon.
-            var isWithin = this.cityPolygons.contains(location);
-            this.showWithinMessage(isWithin, location)
+            var isWithin = this.cityPolygons
+                .map(i => i.contains(location))
+                .reduce((j,k) => j || k, false);
+            this.showWithinMessage(isWithin, location);
 
             this.map.centerAndZoom(location, 20);
         });
