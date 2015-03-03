@@ -25,7 +25,7 @@ export = MapController;
 
 class MapController {
     map: Map;
-    cityPolygon: Polygon;
+    cityPolygons: Polygon[];
     cityLayer: GraphicsLayer;
     messageLayer: GraphicsLayer;
     geometryService: GeometryService;
@@ -83,15 +83,18 @@ class MapController {
         this.cityLayer.clear();
 
         return esriRequest({ url: "geo/chattanooga.geojson", callback: "jsoncallback" }).then((response) => {
-            var feature = response.features[0];
-
-            this.cityPolygon = new Polygon(feature.geometry.coordinates);
-            this.cityPolygon.setSpatialReference(this.wgs84);
-
-            var color = Color.fromString("blue");
-            var outline = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, color, 2);
-            var citySymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, outline, color);
-            this.cityLayer.add(new Graphic(this.cityPolygon, citySymbol));
+            var geom = response.features[0];
+            var geomLength = geom.geometry.coordinates.length;
+            this.cityPolygons = new Array(geomLength);
+            for (var i = 0; i < geomLength; i++) {
+                this.cityPolygons[i] = new Polygon(geom.geometry.coordinates[i]);
+                this.cityPolygons[i].setSpatialReference(this.wgs84);
+                console.log(this.cityPolygons[i]);
+                var color = Color.fromString("blue");
+                var outline = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, color, 2);
+                var citySymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, outline, color);
+                this.cityLayer.add(new Graphic(this.cityPolygons[i], citySymbol));
+            }
 
             return true;
         });
@@ -117,7 +120,7 @@ class MapController {
             return this.projectPoint(this.geometryService, candidate.location, this.wgs84);
         }).then((location: Point) => {
             // Use the builtin contains method for determining whether the address is within the city polygon.
-            var isWithin = this.cityPolygon.contains(location);
+            var isWithin = this.cityPolygons.contains(location);
             this.showWithinMessage(isWithin, location)
 
             this.map.centerAndZoom(location, 20);
@@ -151,7 +154,7 @@ class MapController {
         var deferred = new Deferred<Array<Point>>();
         geometryService.project(parameters, deferred.resolve, deferred.reject);
         return deferred.promise.then((locations) => {
-            // 
+            //
             return locations[0];
         });
     }
@@ -201,4 +204,4 @@ class MapController {
         var addressGraphic = new Graphic(point, addressSymbol);
         this.messageLayer.add(addressGraphic);
     }
-} 
+}
