@@ -1,0 +1,10 @@
+// Additional Defaults
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
+img { max-width: 100%; height: auto; -ms-interpolation-mode:bicubic }
+
+::-moz-selection { background: $light-grey; color: $dark-grey; text-shadow: none; }
+::selection { background: $light-grey; color: $dark-grey; text-shadow: none; }
