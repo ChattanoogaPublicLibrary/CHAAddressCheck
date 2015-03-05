@@ -1,0 +1,51 @@
+.nav {
+  position: absolute;
+  width: 100%;
+  padding: 1.25em 0 1.3em 0;
+  background-color: #fff;
+  background: rgba( white, .8);
+  border-bottom: 1px solid $medium-grey;
+  z-index: 1;
+
+  // Search field
+  #address {
+    display: block;
+    width: 75%;
+    float: right;
+    margin-right: 5%;
+    padding: .5em 1em;
+    font-size: 1.25em;
+    border: 1px solid $medium-grey;
+
+    @media (min-width: 600px) {
+      float: none;
+      margin: auto;
+    }
+
+    &:focus {
+      border: 1px solid $primary-color;
+    }
+
+  }
+
+}
+
+// OSM zoom in/out buttons
+.esriSimpleSlider {
+  position: absolute;
+  top: .7em;
+  border: 1px solid $medium-grey;
+  border-radius: 0;
+
+  .esriSimpleSliderIncrementButton, .esriSimpleSliderDecrementButton {
+    color: $medium-grey;
+    border-color: $medium-grey;
+    border-radius: 0;
+
+    &:hover {
+     color: $primary-color;
+    }
+
+  }
+
+}

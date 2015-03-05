@@ -1,40 +1,14 @@
-@font-face {
-  font-family: 'Chattype-Regular';
-  src: url('../fonts/chattype-regular/chatyperegular-webfont.eot');
-  src: url('../fonts/chattype-regular/chatyperegular-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/chattype-regular/chatyperegular-webfont.woff') format('woff'),
-       url('../fonts/chattype-regular/chatyperegular-webfont.ttf') format('truetype'),
-       url('../fonts/chattype-regular/chatyperegular-webfont.svg#chatyperegular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Chattype-Bold';
-  src: url('../fonts/chattype-bold/chatypebold-webfont.eot');
-  src: url('../fonts/chattype-bold/chatypebold-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/chattype-bold/chatypebold-webfont.woff') format('woff'),
-       url('../fonts/chattype-bold/chatypebold-webfont.ttf') format('truetype'),
-       url('../fonts/chattype-bold/chatypebold-webfont.svg#chatypebold-webfont') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
 body {
-  font-family: 'Chattype-Regular', helvetica, arial, sans-serif; 
+  font-family: 'Open Sans', helvetica, arial, sans-serif;
   font-size: 16px;
+  font-weight: 400;
   line-height: 1.65;
   color: $dark-grey;
 }
 
 // targets the wihin or not within text
 svg text {
-  font-family: 'Chattype-Bold', helvetica, arial, sans-serif; 
+  font-family: 'Open Sans', helvetica, arial, sans-serif;
+  font-weight: 700;
   font-size: 2.15em;
-}
-
-// overides boundary color
-#graphicsLayer1_layer path {
-  fill: $magenta;
-  stroke: $magenta;
 }
